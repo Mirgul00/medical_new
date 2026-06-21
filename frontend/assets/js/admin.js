@@ -38,14 +38,24 @@
     editingBeforeAfterId: null,
   };
 
-function getToken() {
-  return localStorage.getItem("token");
-}
+  let isLoggingOut = false;
 
- if (!getToken()) {
-  window.location.href = "login.html";
-  return;
-}
+  function getToken() {
+    return localStorage.getItem("token");
+  }
+
+  function redirectToLogin() {
+    if (isLoggingOut) return;
+    isLoggingOut = true;
+    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
+    window.location.replace("login.html");
+  }
+
+  if (!getToken()) {
+    redirectToLogin();
+    return;
+  }
 
   function $(selector) {
     return document.querySelector(selector);
@@ -108,40 +118,35 @@ function getToken() {
       return fallback;
     }
   }
-  let isLoggingOut = false;
   async function api(path, options = {}, fallback = null) {
-  const token = getToken();
+    const token = getToken();
 
-  if (!token) {
-    window.location.href = "login.html";
-    throw new Error("No token");
-  }
-
-  const headers = new Headers(options.headers || {});
-  headers.set("Authorization", `Bearer ${token}`);
-  const response = await fetch(`${adminApiRoot}${path}`, {
-    ...options,
-    headers,
-    cache: "no-store",
-  });
-
-  const data = await safeJson(response, fallback);
-  
-  if (response.status === 401) {
-    if (!isLoggingOut) {
-      isLoggingOut = true;
-      localStorage.removeItem("token");
-      window.location.href = "login.html";
+    if (!token) {
+      redirectToLogin();
+      throw new Error("No token");
     }
-    throw new Error("Unauthorized");
-  }
 
-  if (!response.ok) {
-    throw new Error(data?.message || data?.error || data?.detail || "API request failed");
-  }
+    const headers = new Headers(options.headers || {});
+    headers.set("Authorization", `Bearer ${token}`);
+    const response = await fetch(`${adminApiRoot}${path}`, {
+      ...options,
+      headers,
+      cache: "no-store",
+    });
 
-  return data;
-}
+    const data = await safeJson(response, fallback);
+
+    if (response.status === 401) {
+      redirectToLogin();
+      throw new Error("Unauthorized");
+    }
+
+    if (!response.ok) {
+      throw new Error(data?.message || data?.error || data?.detail || "API request failed");
+    }
+
+    return data;
+  }
 
   async function uploadImageFromInput(inputId) {
     const input = document.getElementById(inputId);
@@ -1464,9 +1469,7 @@ function getToken() {
   }
 
   window.logout = function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("admin");
-    window.location.href = "login.html";
+    redirectToLogin();
   };
 
   bindEvents();

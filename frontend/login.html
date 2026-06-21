@@ -72,6 +72,10 @@
         window.APP_CONFIG?.API_ROOT ||
         "";
 
+      if (localStorage.getItem("token")) {
+        window.location.replace("admin.html");
+      }
+
       async function login() {
         const email = document.getElementById("email").value.trim();
 
@@ -85,21 +89,20 @@
         form.append("password", password);
 
         try {
-	          const response = await fetch(`${API_ROOT}/admin/login`, {
-	                method: "POST",
-	                body: form
-	                
-	              });
-                
-              const data = await response.json();
+          const response = await fetch(`${API_ROOT}/admin/login`, {
+            method: "POST",
+            body: form,
+          });
 
-              if (!response.ok) {
-                alert(data.detail || "Ошибка входа");
-                return;
-              }
+          const data = await response.json();
 
-              localStorage.setItem("token", data.token);
-              window.location.href = "/admin.html";
+          if (!response.ok) {
+            message.textContent = data.message || data.error || data.detail || "Ошибка входа";
+            return;
+          }
+
+          localStorage.setItem("token", data.token);
+          window.location.replace("admin.html");
         } catch (error) {
           message.textContent = "Не удалось подключиться к серверу";
         }
