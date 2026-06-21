@@ -154,7 +154,7 @@ window.addEventListener('click', (e) => {
 
 window.API_ROOT =
   window.APP_CONFIG?.API_ROOT ||
-  "";
+  "https://dadanova-backend.onrender.com";
 
 function normalizeExternalUrl(value) {
   const url = String(value || "").trim()

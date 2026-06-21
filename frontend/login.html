@@ -85,11 +85,12 @@
         form.append("password", password);
 
         try {
-          const response = await fetch(`${API_ROOT}/admin/login`, {
-                method: "POST",
-                body: form
-              });
-
+	          const response = await fetch(`${API_ROOT}/admin/login`, {
+	                method: "POST",
+	                body: form
+	                
+	              });
+                
               const data = await response.json();
 
               if (!response.ok) {

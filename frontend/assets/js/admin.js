@@ -38,7 +38,7 @@
     editingBeforeAfterId: null,
   };
 
-  const adminToken = localStorage.getItem("adminToken");
+  const adminToken = localStorage.getItem("token");
 
   if (!adminToken) {
     window.location.href = "login.html";
@@ -108,28 +108,35 @@
   }
 
   async function api(path, options = {}, fallback = null) {
-    const headers = new Headers(options.headers || {});
-    headers.set("Authorization", `Bearer ${adminToken}`);
+  const headers = new Headers(options.headers || {});
 
-    const response = await fetch(`${adminApiRoot}${path}`, {
-      ...options,
-      headers,
-      cache: "no-store",
-    });
-    const data = await safeJson(response, fallback);
-
-    if (response.status === 401) {
-      localStorage.removeItem("adminToken");
-      window.location.href = "login.html";
-      throw new Error("Требуется вход администратора");
-    }
-
-    if (!response.ok) {
-      throw new Error(data?.message || data?.error || data?.detail || "API request failed");
-    }
-
-    return data;
+  if (!adminToken) {
+    window.location.href = "login.html";
+    return;
   }
+
+  headers.set("Authorization", `Bearer ${adminToken}`);
+
+  const response = await fetch(`${adminApiRoot}${path}`, {
+    ...options,
+    headers,
+    cache: "no-store",
+  });
+
+  const data = await safeJson(response, fallback);
+
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+    throw new Error("Требуется вход администратора");
+  }
+
+  if (!response.ok) {
+    throw new Error(data?.message || data?.error || data?.detail || "API request failed");
+  }
+
+  return data;
+}
 
   async function uploadImageFromInput(inputId) {
     const input = document.getElementById(inputId);
@@ -1452,7 +1459,7 @@
   }
 
   window.logout = function logout() {
-    localStorage.removeItem("adminToken");
+    localStorage.removeItem("token");
     localStorage.removeItem("admin");
     window.location.href = "login.html";
   };
