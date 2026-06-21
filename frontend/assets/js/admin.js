@@ -38,12 +38,14 @@
     editingBeforeAfterId: null,
   };
 
-  const adminToken = localStorage.getItem("token");
+function getToken() {
+  return localStorage.getItem("token");
+}
 
-  if (!adminToken) {
-    window.location.href = "login.html";
-    return;
-  }
+ if (!getToken()) {
+  window.location.href = "login.html";
+  return;
+}
 
   function $(selector) {
     return document.querySelector(selector);
@@ -106,17 +108,17 @@
       return fallback;
     }
   }
-
+  let isLoggingOut = false;
   async function api(path, options = {}, fallback = null) {
-  const headers = new Headers(options.headers || {});
+  const token = getToken();
 
-  if (!adminToken) {
+  if (!token) {
     window.location.href = "login.html";
-    return;
+    throw new Error("No token");
   }
 
-  headers.set("Authorization", `Bearer ${adminToken}`);
-
+  const headers = new Headers(options.headers || {});
+  headers.set("Authorization", `Bearer ${token}`);
   const response = await fetch(`${adminApiRoot}${path}`, {
     ...options,
     headers,
@@ -124,11 +126,14 @@
   });
 
   const data = await safeJson(response, fallback);
-
+  
   if (response.status === 401) {
-    localStorage.removeItem("token");
-    window.location.href = "login.html";
-    throw new Error("Требуется вход администратора");
+    if (!isLoggingOut) {
+      isLoggingOut = true;
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+    throw new Error("Unauthorized");
   }
 
   if (!response.ok) {
