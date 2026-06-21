@@ -86,20 +86,19 @@
 
         try {
           const response = await fetch(`${API_ROOT}/admin/login`, {
-            method: "POST",
-            body: form,
-          });
+                method: "POST",
+                body: form
+              });
 
-          const data = await response.json().catch(() => ({}));
+              const data = await response.json();
 
-          if (!response.ok || !data.token) {
-            message.textContent = data.message || "Неверный логин или пароль";
-            return;
-          }
+              if (!response.ok) {
+                alert(data.detail || "Ошибка входа");
+                return;
+              }
 
-          localStorage.setItem("adminToken", data.token);
-
-          window.location.href = "admin.html";
+              localStorage.setItem("token", data.token);
+              window.location.href = "/admin.html";
         } catch (error) {
           message.textContent = "Не удалось подключиться к серверу";
         }
