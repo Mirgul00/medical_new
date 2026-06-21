@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI анализ состояния кожи как предварительный шаг перед консультацией дерматолога-косметолога." />
+    <meta property="og:title" content="AI анализ кожи | Dadanova" />
+    <meta property="og:description" content="Загрузите фото для предварительной визуальной оценки кожи." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/img/IMG_4211.png" />
+    <title>AI анализ кожи | Dadanova</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="index.html" class="nav__logo">
+          <i class="ri-stethoscope-line"></i> Dadanova
+        </a>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li><a href="index.html#home" class="nav__link">Главная</a></li>
+            <li><a href="index.html#services" class="nav__link">Услуги</a></li>
+            <li><a href="index.html#ai" class="nav__link">AI Анализ</a></li>
+            <li><a href="index.html#contact" class="nav__link">Контакты</a></li>
+          </ul>
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </div>
+        <div class="nav__buttons">
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="ai-page">
+      <section class="ai-page__section section">
+        <div class="ai-page__container container">
+          <div class="ai-page__copy">
+            <span>AI skin check</span>
+            <h1>AI анализ состояния кожи</h1>
+            <p>Загрузите фото лица, чтобы подготовить визуальный запрос перед консультацией. Результат не заменяет диагностику врача.</p>
+            <a href="booking.html" class="button main-btn">Записаться</a>
+          </div>
+
+          <div class="ai-page__panel">
+            <div class="ai-page__preview">
+              <img id="ai-preview" src="" alt="Загруженное фото" hidden />
+              <i class="ri-image-add-line"></i>
+            </div>
+            <label class="ai-page__upload">
+              <input id="ai-photo" type="file" accept="image/*" />
+              <span>Загрузить фото</span>
+            </label>
+            <p id="ai-result" class="ai-page__result"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__bg"></div>
+      <div class="footer__container container">
+        <div class="footer__content">
+          <h2 class="footer__logo"><i class="ri-stethoscope-line"></i> Dadanova</h2>
+          <p class="footer__description">Современная косметология, профессиональный уход и AI технологии для вашей красоты и уверенности.</p>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__title">Контакты</h3>
+          <ul class="footer__list">
+            <li><i class="ri-map-pin-line"></i> <span data-site-address>Турусбекова-13</span></li>
+            <li><i class="ri-phone-line"></i> <span data-site-phone>0702664406</span></li>
+            <li><i class="ri-mail-line"></i> <span data-site-email>begimaj.dadanova@gmail.com</span></li>
+          </ul>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__title">Мы в соцсетях</h3>
+          <div class="footer__social">
+            <a href="https://instagram.com/dr_dadanoca" class="footer__social-link" data-site-instagram><i class="ri-instagram-line"></i></a>
+          </div>
+        </div>
+      </div>
+      <span class="footer__copy">© 2026 Dadanova. Все права защищены</span>
+    </footer>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/services-page.js"></script>
+    <script src="assets/js/ai-page.js"></script>
+  </body>
+</html>

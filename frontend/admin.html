@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dadanova Admin</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+  </head>
+
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-brand" href="#calendar" data-view-link="calendar">
+          <span class="admin-brand__icon"><i class="ri-stethoscope-line"></i></span>
+          <span>
+            <strong>Dadanova</strong>
+            <small>Doctor Admin</small>
+          </span>
+        </a>
+
+        <nav class="admin-menu" aria-label="Admin navigation">
+          <button class="active" data-view-link="calendar" type="button">
+            <i class="ri-calendar-2-line"></i>
+            Календарь
+          </button>
+          <button data-view-link="bookings" type="button">
+            <i class="ri-file-list-3-line"></i>
+            Записи
+          </button>
+          <button data-view-link="clients" type="button">
+            <i class="ri-user-3-line"></i>
+            Клиенты
+          </button>
+          <button data-view-link="services" type="button">
+            <i class="ri-sparkling-line"></i>
+            Услуги
+          </button>
+          <button data-view-link="certificates" type="button">
+            <i class="ri-award-line"></i>
+            Сертификаты
+          </button>
+          <button data-view-link="before-after" type="button">
+            <i class="ri-image-2-line"></i>
+            До / После
+          </button>
+          <button data-view-link="schedule" type="button">
+            <i class="ri-time-line"></i>
+            Расписание
+          </button>
+          <button data-view-link="reviews" type="button">
+            <i class="ri-star-smile-line"></i>
+            Отзывы
+          </button>
+          <button data-view-link="settings" type="button">
+            <i class="ri-settings-3-line"></i>
+            Настройки
+          </button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span>Новые записи</span>
+          <strong id="notificationCount">0</strong>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-topbar">
+          <div class="topbar-title">
+            <p class="admin-eyebrow" id="todayDate">Сегодня</p>
+            <h1 id="pageTitle">Главная</h1>
+          </div>
+
+          <div class="topbar-search">
+            <i class="ri-search-line"></i>
+            <input id="globalClientSearch" placeholder="Поиск клиентов" />
+          </div>
+
+          <div class="topbar-actions">
+            <button class="icon-button notification-button" data-view-link="bookings" type="button" aria-label="Новые уведомления">
+              <i class="ri-notification-3-line"></i>
+              <span id="topbarNotificationCount">0</span>
+            </button>
+            <button class="primary-button" id="newAppointmentBtn" type="button">
+              <i class="ri-add-line"></i>
+              Новая запись
+            </button>
+            <div class="profile-menu">
+              <button class="profile-trigger" id="profileTrigger" type="button">
+                <img src="assets/img/IMG_4211.png" alt="Dadanova" />
+                <span>Даданова Бегимай</span>
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+              <div class="profile-dropdown" id="profileDropdown">
+                <button data-view-link="settings" type="button">Профиль</button>
+                <button id="refreshBtn" type="button">Обновить данные</button>
+                <button onclick="logout()" type="button">Выйти</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="admin-view active" id="view-calendar">
+          <div class="calendar-stat-grid">
+            <article class="calendar-stat-card">
+              <span>Сегодня записей</span>
+              <strong id="calendarTodayCount">0</strong>
+            </article>
+            <article class="calendar-stat-card">
+              <span>Свободных слотов</span>
+              <strong id="calendarFreeCount">0</strong>
+            </article>
+            <article class="calendar-stat-card">
+              <span>Доход за день</span>
+              <strong id="calendarRevenueCount">0</strong>
+            </article>
+            <article class="calendar-stat-card">
+              <span>Новых клиентов</span>
+              <strong id="calendarNewClientsCount">0</strong>
+            </article>
+          </div>
+
+          <div class="calendar-layout">
+            <aside class="panel mini-calendar-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Calendar</p>
+                  <h2 id="miniCalendarTitle">Месяц</h2>
+                </div>
+              </div>
+              <div class="calendar-controls">
+                <button class="icon-button" id="calendarPrev" type="button"><i class="ri-arrow-left-s-line"></i></button>
+                <input id="calendarDate" type="date" />
+                <button class="icon-button" id="calendarNext" type="button"><i class="ri-arrow-right-s-line"></i></button>
+              </div>
+              <div class="mini-calendar" id="miniCalendar"></div>
+            </aside>
+
+            <article class="panel schedule-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Live schedule</p>
+                  <h2 id="calendarDayTitle">Расписание</h2>
+                </div>
+                <div class="segmented">
+                  <button class="active" data-calendar-mode="day" type="button">День</button>
+                  <button data-calendar-mode="week" type="button">Неделя</button>
+                  <button data-calendar-mode="month" type="button">Месяц</button>
+                </div>
+              </div>
+              <div id="calendarSchedule" class="schedule-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-bookings">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="admin-eyebrow">Bookings</p>
+                <h2>Записи клиентов</h2>
+              </div>
+            </div>
+
+            <div class="filters-grid">
+              <input id="bookingSearch" placeholder="Поиск по имени или номеру" />
+              <input id="bookingDateFilter" type="date" />
+              <select id="bookingStatusFilter">
+                <option value="">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="confirmed">Подтверждены</option>
+                <option value="completed">Завершены</option>
+                <option value="cancelled">Отменены</option>
+              </select>
+            </div>
+
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Клиент</th>
+                    <th>Телефон</th>
+                    <th>Процедура</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTable"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="admin-view" id="view-services">
+          <div class="services-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Services</p>
+                  <h2>Добавить / редактировать услугу</h2>
+                </div>
+              </div>
+
+              <form class="admin-form premium-form" id="serviceForm">
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Название услуги</span>
+                  <span class="ant-input-shell">
+                    <i class="ri-sparkling-line"></i>
+                    <input id="serviceTitle" placeholder="Например: Чистка лица" />
+                  </span>
+                </label>
+                <div class="ant-form-grid">
+                  <label class="ant-field">
+                    <span class="ant-field__label">Цена</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-money-dollar-circle-line"></i>
+                      <input id="servicePrice" placeholder="Например: 2500 сом" />
+                    </span>
+                  </label>
+                  <label class="ant-field">
+                    <span class="ant-field__label">Длительность</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-time-line"></i>
+                      <input id="serviceDuration" placeholder="60 минут" />
+                    </span>
+                  </label>
+                </div>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Категория</span>
+                  <span class="ant-input-shell">
+                    <i class="ri-price-tag-3-line"></i>
+                    <input id="serviceCategory" placeholder="Например: Инъекционные процедуры" />
+                  </span>
+                </label>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Описание</span>
+                  <span class="ant-input-shell ant-textarea-shell">
+                    <i class="ri-file-text-line"></i>
+                    <textarea id="serviceDescription" placeholder="Короткое описание процедуры для сайта"></textarea>
+                  </span>
+                </label>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Изображение</span>
+                  <span class="ant-upload-shell">
+                    <input id="serviceImage" type="file" accept="image/*" />
+                    <span class="ant-upload-icon"><i class="ri-upload-cloud-2-line"></i></span>
+                    <span>
+                      <strong>Загрузить фото с компьютера</strong>
+                      <small id="serviceImageLabel">PNG, JPG, WEBP</small>
+                    </span>
+                  </span>
+                  <input id="serviceImagePath" type="hidden" value="" />
+                </label>
+                <label class="switch-row ant-switch-row">
+                  <input id="serviceActive" type="checkbox" checked />
+                  <span class="ant-switch-ui"></span>
+                  <span>Активна на сайте</span>
+                </label>
+                <input id="serviceId" type="hidden" value="" />
+                <button class="primary-button" id="serviceSubmit" type="submit">Добавить услугу</button>
+                <p id="serviceMessage" class="form-message"></p>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Catalog</p>
+                  <h2>Список процедур</h2>
+                </div>
+              </div>
+              <div class="services-list" id="servicesList"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-certificates">
+          <div class="services-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Certificates</p>
+                  <h2>Добавить / редактировать сертификат</h2>
+                </div>
+              </div>
+
+              <form class="admin-form premium-form" id="certificateForm">
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Название сертификата</span>
+                  <span class="ant-input-shell">
+                    <i class="ri-award-line"></i>
+                    <input id="certificateTitle" placeholder="Например: Международный сертификат косметологии" />
+                  </span>
+                </label>
+                <div class="ant-form-grid">
+                  <label class="ant-field">
+                    <span class="ant-field__label">Год</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-calendar-check-line"></i>
+                      <input id="certificateYear" placeholder="2026" />
+                    </span>
+                  </label>
+                  <label class="ant-field">
+                    <span class="ant-field__label">Теги</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-price-tag-3-line"></i>
+                      <input id="certificateTags" placeholder="Косметология, Skin Care" />
+                    </span>
+                  </label>
+                </div>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Изображение</span>
+                  <span class="ant-upload-shell">
+                    <input id="certificateImage" type="file" accept="image/*" />
+                    <span class="ant-upload-icon"><i class="ri-upload-cloud-2-line"></i></span>
+                    <span>
+                      <strong>Загрузить фото с компьютера</strong>
+                      <small id="certificateImageLabel">PNG, JPG, WEBP</small>
+                    </span>
+                  </span>
+                  <input id="certificateImagePath" type="hidden" value="" />
+                </label>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Описание</span>
+                  <span class="ant-input-shell ant-textarea-shell">
+                    <i class="ri-file-text-line"></i>
+                    <textarea id="certificateDescription" placeholder="Краткое описание обучения или сертификата"></textarea>
+                  </span>
+                </label>
+                <label class="switch-row ant-switch-row">
+                  <input id="certificateActive" type="checkbox" checked />
+                  <span class="ant-switch-ui"></span>
+                  <span>Показывать на сайте</span>
+                </label>
+                <input id="certificateId" type="hidden" value="" />
+                <button class="primary-button" id="certificateSubmit" type="submit">Добавить сертификат</button>
+                <p id="certificateMessage" class="form-message"></p>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Content</p>
+                  <h2>Список сертификатов</h2>
+                </div>
+              </div>
+              <div class="services-list" id="certificatesList"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-before-after">
+          <div class="services-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Before / After Cases</p>
+                  <h2>Добавить / редактировать кейс</h2>
+                </div>
+              </div>
+
+              <form class="admin-form premium-form" id="beforeAfterForm">
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Название кейса</span>
+                  <span class="ant-input-shell">
+                    <i class="ri-image-2-line"></i>
+                    <input id="beforeAfterTitle" placeholder="Например: Восстановление ровного тона" />
+                  </span>
+                </label>
+                <label class="ant-field ant-field-wide">
+                  <span class="ant-field__label">Описание</span>
+                  <span class="ant-input-shell ant-textarea-shell">
+                    <i class="ri-file-text-line"></i>
+                    <textarea id="beforeAfterDescription" placeholder="Короткое описание ситуации"></textarea>
+                  </span>
+                </label>
+                <div class="ant-form-grid">
+                  <label class="ant-field">
+                    <span class="ant-field__label">Процедура</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-sparkling-line"></i>
+                      <input id="beforeAfterProcedure" placeholder="Например: Пилинг + уход" />
+                    </span>
+                  </label>
+                  <label class="ant-field">
+                    <span class="ant-field__label">Результат</span>
+                    <span class="ant-input-shell">
+                      <i class="ri-check-double-line"></i>
+                      <input id="beforeAfterResult" placeholder="Короткий результат" />
+                    </span>
+                  </label>
+                </div>
+                <div class="ant-form-grid">
+                  <label class="ant-field">
+                    <span class="ant-field__label">Фото до</span>
+                    <span class="ant-upload-shell">
+                      <input id="beforeAfterBeforeImage" type="file" accept="image/*" />
+                      <span class="ant-upload-icon"><i class="ri-upload-cloud-2-line"></i></span>
+                      <span>
+                        <strong>Загрузить фото до</strong>
+                        <small id="beforeAfterBeforeLabel">PNG, JPG, WEBP</small>
+                      </span>
+                    </span>
+                    <input id="beforeAfterBeforePath" type="hidden" value="" />
+                  </label>
+                  <label class="ant-field">
+                    <span class="ant-field__label">Фото после</span>
+                    <span class="ant-upload-shell">
+                      <input id="beforeAfterAfterImage" type="file" accept="image/*" />
+                      <span class="ant-upload-icon"><i class="ri-upload-cloud-2-line"></i></span>
+                      <span>
+                        <strong>Загрузить фото после</strong>
+                        <small id="beforeAfterAfterLabel">PNG, JPG, WEBP</small>
+                      </span>
+                    </span>
+                    <input id="beforeAfterAfterPath" type="hidden" value="" />
+                  </label>
+                </div>
+                <label class="switch-row ant-switch-row">
+                  <input id="beforeAfterActive" type="checkbox" checked />
+                  <span class="ant-switch-ui"></span>
+                  <span>Показывать на сайте</span>
+                </label>
+                <input id="beforeAfterId" type="hidden" value="" />
+                <button class="primary-button" id="beforeAfterSubmit" type="submit">Добавить кейс</button>
+                <p id="beforeAfterMessage" class="form-message"></p>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Results</p>
+                  <h2>Список кейсов</h2>
+                </div>
+              </div>
+              <div class="services-list" id="beforeAfterList"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-schedule">
+          <div class="services-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Schedule</p>
+                  <h2>Рабочее расписание</h2>
+                </div>
+              </div>
+
+              <form class="admin-form" id="scheduleForm">
+                <div class="weekday-grid">
+                  <label><input type="checkbox" name="workDay" value="1" /> Пн</label>
+                  <label><input type="checkbox" name="workDay" value="2" /> Вт</label>
+                  <label><input type="checkbox" name="workDay" value="3" /> Ср</label>
+                  <label><input type="checkbox" name="workDay" value="4" /> Чт</label>
+                  <label><input type="checkbox" name="workDay" value="5" /> Пт</label>
+                  <label><input type="checkbox" name="workDay" value="6" /> Сб</label>
+                  <label><input type="checkbox" name="workDay" value="0" /> Вс</label>
+                </div>
+                <div class="form-row">
+                  <label>Начало<input id="scheduleStart" type="time" /></label>
+                  <label>Конец<input id="scheduleEnd" type="time" /></label>
+                </div>
+                <div class="form-row">
+                  <label>Перерыв с<input id="breakStart" type="time" /></label>
+                  <label>Перерыв до<input id="breakEnd" type="time" /></label>
+                </div>
+                <button class="primary-button" type="submit">Сохранить расписание</button>
+                <p id="scheduleMessage" class="form-message"></p>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="admin-eyebrow">Manual closing</p>
+                  <h2>Закрыть слот</h2>
+                </div>
+              </div>
+              <form class="admin-form" id="closedSlotForm">
+                <div class="form-row">
+                  <input id="closedSlotDate" type="date" />
+                  <input id="closedSlotTime" type="time" />
+                </div>
+                <input id="closedSlotReason" placeholder="Причина закрытия" />
+                <button class="ghost-button" type="submit">Закрыть слот</button>
+              </form>
+              <div class="closed-slots" id="closedSlotsList"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-clients">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="admin-eyebrow">Clients</p>
+                <h2>Клиенты и история</h2>
+              </div>
+              <input id="clientSearch" placeholder="Поиск клиента" />
+            </div>
+            <div class="clients-grid" id="clientsList"></div>
+          </article>
+        </section>
+
+        <section class="admin-view" id="view-reviews">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="admin-eyebrow">Reviews</p>
+                <h2>Отзывы на главной</h2>
+              </div>
+            </div>
+            <p class="panel-note">На сайте показываются ровно 3 отзыва. Их можно редактировать, но нельзя добавлять или удалять.</p>
+            <div class="review-admin-grid" id="reviewsAdminList"></div>
+          </article>
+        </section>
+
+        <section class="admin-view" id="view-settings">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="admin-eyebrow">Site settings</p>
+                <h2>Профиль специалиста</h2>
+              </div>
+            </div>
+
+            <form class="admin-form" id="siteSettingsForm">
+              <input id="siteDoctorName" placeholder="Имя врача" />
+              <div class="form-row">
+                <input id="siteSpecialty" placeholder="Специализация" />
+                <input id="siteExperience" placeholder="Опыт работы" />
+              </div>
+              <input id="siteClients" placeholder="Количество клиентов" />
+              <div class="form-row">
+                <input id="sitePhone" placeholder="Телефон" />
+                <input id="siteEmail" placeholder="Email" />
+              </div>
+              <input id="siteAddress" placeholder="Адрес приёма" />
+              <input id="siteInstagram" placeholder="Instagram ссылка" />
+              <input id="siteTelegram" placeholder="Telegram ссылка или телефон" />
+              <input id="siteTiktok" placeholder="TikTok ссылка" />
+              <button class="primary-button" type="submit">Сохранить настройки</button>
+              <p id="siteSettingsMessage" class="form-message"></p>
+            </form>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="appointmentModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <button class="icon-button modal-close" data-close-modal type="button">
+          <i class="ri-close-line"></i>
+        </button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <div class="drawer" id="appointmentDrawer" aria-hidden="true">
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <aside class="drawer-panel" role="dialog" aria-modal="true">
+        <div class="drawer-head">
+          <div>
+            <p class="admin-eyebrow">New booking</p>
+            <h2>Новая запись</h2>
+          </div>
+          <button class="icon-button" data-close-drawer type="button">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <form class="admin-form" id="adminBookingForm">
+          <input id="adminBookingName" placeholder="Имя клиента" />
+          <input id="adminBookingPhone" inputmode="numeric" placeholder="996 ___ ___ ___" />
+          <select id="adminBookingProcedure"></select>
+          <div class="form-row">
+            <input id="adminBookingDate" type="date" />
+            <input id="adminBookingTime" type="time" step="1800" />
+          </div>
+          <textarea id="adminBookingComment" placeholder="Комментарий"></textarea>
+          <button class="primary-button" type="submit">Создать запись</button>
+          <p id="adminBookingMessage" class="form-message"></p>
+        </form>
+      </aside>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/admin.js"></script>
+  </body>
+</html>

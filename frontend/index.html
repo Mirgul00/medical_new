@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+   <html lang="ru">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Даданова Бегимай Нурмухамедовна — дерматолог-косметолог. Инъекционные процедуры, уход, чистка лица, пилинги и консультации в Бишкеке.">
+      <meta property="og:title" content="Даданова Бегимай | Дерматолог-косметолог">
+      <meta property="og:description" content="Профессиональная косметология, дерматологический уход и запись на консультацию.">
+      <meta property="og:type" content="website">
+      <meta property="og:image" content="assets/img/IMG_4211.png">
+
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+
+
+
+      <title>Даданова Бегимай | Дерматолог-косметолог</title>
+   </head>
+
+
+   <!-- HEADER  -->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#home" class="nav__logo">
+               <i class="ri-stethoscope-line"></i> Dadanova
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                  <ul class="nav__list">
+                     <li>
+                        <a href="#home" class="nav__link">Главная</a>
+                     </li>
+                     <li>
+                        <a href="#services" class="nav__link">Услуги</a>
+                     </li>
+
+                      <li>
+                        <a href="#about" class="nav__link">Обо мне</a>
+                     </li>
+
+                     
+                      <li>
+                        <a href="#ai" class="nav__link">AI Анализ</a>
+                     </li>
+
+                      <li>
+                        <a href="#contact" class="nav__link">Контакты</a>
+                     </li>
+                  </ul>
+
+                  <div class="nav__close" id="nav-close">
+                     <i class="ri-close-line"></i>
+                  </div>
+            </div>
+            <div class="nav__buttons">
+               <div class="nav__toggle" id="nav-toggle">
+                  <i class="ri-menu-line"></i>
+               </div>
+            </div>
+         </nav>
+      </header>
+
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+         <section class="home section" id="home">
+            <div class="home__container container grid">
+               <div class="home__data">
+                  <h1 class="home__title">
+                     Профессиональная <br>
+                     <span>Косметология и уход</span>
+                  </h1>
+
+                  <p class="home__description">
+                     Современные косметологические процедуры для здоровой, 
+                     сияющей и молодой кожи.
+                  </p>
+
+                  <div class="home__buttons">
+                     <a href="#services" class="button main-btn">Выбрать услугу</a>
+                     <a href="#contact" class="button ghost-btn">Связаться</a>
+                  </div>
+               </div>
+               <div class="home__content grid">
+                                     <div class="home__image">
+                     <img src="assets/img/IMG_4211.png" alt="image" class="home__img">
+                  </div>
+                     <div class="home__info">
+                        <div class="info__card">
+                           <h2 data-site-experience>6 лет</h2>
+                           <p>Опыт в косметологии</p>
+                        </div>
+
+                        <div class="info__card">
+                           <h2 data-site-clients>25 000+</h2>
+                           <p>Довольных клиентов</p>
+                        </div>
+
+                        <div class="info__card">
+                           <h2 data-site-specialty>Дерма-косметолог</h2>
+                           <p>Специализация врача</p>
+                        </div>
+
+                        <div class="info__card">
+                           <h2>100%</h2>
+                           <p>Сертифицированные препараты</p>
+                        </div>
+                     </div>
+
+         </section>
+
+         <div class="section-divider"></div>
+         <!--==================== featured  ====================-->
+            <section class="services section" id="services">
+            <h2 class="section__title">Наши услуги</h2>
+
+            <div class="carousel">
+                <div class="carousel__track">
+
+                <div class="card card--loading">
+                    <img src="assets/img/home-img.png" alt="Загрузка услуг" />
+                    <h3>Загрузка услуг</h3>
+                    <p>Актуальный список появится автоматически.</p>
+                </div>
+
+
+                <!-- arrows -->
+                <button class="carousel__btn prev">‹</button>
+                <button class="carousel__btn next">›</button>
+            </div>
+            <div class="services__actions">
+               <a class="services__all-btn" href="services/">
+                  Посмотреть все услуги
+                  <i class="ri-arrow-right-line"></i>
+               </a>
+            </div>
+            </section>
+
+            <!-- MODAL -->
+            <div class="modal" id="service-modal">
+            <div class="modal__content large">
+
+               <span class="modal__close">&times;</span>
+
+               <h2 id="modal-title"></h2>
+               <p id="modal-desc"></p>
+               <p id="modal-price"></p>
+
+            </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+                    <section class="results section" id="results">
+                       <div class="container">
+                          <div class="results__head">
+                             <span class="results__eyebrow">Результаты</span>
+                             <h2 class="section__title">До и После</h2>
+                          </div>
+                       </div>
+
+                       <div class="results__container container">
+                          <div class="results__content">
+                             <div class="results__case">
+                                <h3 id="results-title">Восстановление ровного тона</h3>
+                                <p id="results-description">Мягкая работа с тусклостью и неровной текстурой кожи.</p>
+                                <div class="results__meta">
+                                   <span>Процедура</span>
+                                   <strong id="results-procedure">Пилинг + уход</strong>
+                                </div>
+                                <div class="results__meta">
+                                   <span>Результат</span>
+                                   <strong id="results-result">Более ровный тон и визуально свежая кожа.</strong>
+                                </div>
+                             </div>
+                             <div class="results__nav">
+                                <button id="results-prev" type="button" aria-label="Предыдущий результат">
+                                   <i class="ri-arrow-left-line"></i>
+                                </button>
+                                <button id="results-next" type="button" aria-label="Следующий результат">
+                                   <i class="ri-arrow-right-line"></i>
+                                </button>
+                             </div>
+                          </div>
+
+                          <div class="results__compare" id="results-compare">
+                             <img id="results-after" class="results__image results__image--after" src="assets/img/Rejuvenation.jpg" alt="После процедуры">
+                             <div class="results__before" id="results-before-wrap">
+                                <img id="results-before" class="results__image" src="assets/img/Acne Treatment.jpeg" alt="До процедуры">
+                             </div>
+                             <div class="results__divider" id="results-divider">
+                                <span></span>
+                             </div>
+                             <input id="results-range" class="results__range" type="range" min="0" max="100" value="50" aria-label="Сравнение до и после">
+                          </div>
+                       </div>
+                    </section>
+
+            <div class="section-divider"></div>
+         <!-- ==================== ABOUT ==================== -->
+
+                     <section class="cert section" id="about">
+                     <div class="container cert__container">
+
+                        <!-- LEFT TEXT -->
+                        <div class="cert__data">
+                           <h2 class="section__title">О враче</h2>
+
+                           <h1 class="cert__title">
+                           Даданова Бегимай <br> Нурмухамедовна
+                           </h1>
+
+                           <p class="cert__description">
+                           Дерматолог-косметолог с медицинским образованием, ординатурой по дерматовенерологии и практикой в эстетической и инъекционной косметологии.
+                           </p>
+
+                           <ul class="cert__list">
+                           <li><i class="ri-check-line"></i> КГМА им. И.К. Ахунбаева, факультет Педиатрия</li>
+                           <li><i class="ri-check-line"></i> Ординатура: Дерматовенерология</li>
+                           <li><i class="ri-check-line"></i> Эстетическая и инъекционная косметология</li>
+                           <li><i class="ri-check-line"></i> Мезотерапия, биоревитализация, плазмотерапия</li>
+                           <li><i class="ri-check-line"></i> КГМИПиПК им. С.Б. Даниярова, Косметология</li>
+                           </ul>
+
+                            <button class="cert__button" id="open-cert">
+                              Посмотреть сертификаты  <i class="ri-arrow-right-line"></i>
+                           </button>
+                        </div>
+
+                        <!-- RIGHT IMAGES -->
+                        <div class="cert__images">
+                           <img src="assets/img/Gemini_Generated_Image_k1qavpk1qavpk1qa.png" class="cert__img main">
+                           <img src="assets/img/Gemini_Generated_Image_k1qavpk1qavpk1qa.png" class="cert__img second">
+                           <img src="assets/img/Gemini_Generated_Image_k1qavpk1qavpk1qa.png" class="cert__img third">
+                        </div>
+                     </div>
+                        <div class="cert__modal" id="cert-modal">
+                              <div class="cert__modal-content">
+                                 <span class="cert__close" id="close-cert">&times;</span>
+
+                                <div class="cert__gallery" id="certGallery">
+
+   <!-- CARD 1 -->
+   <div class="cert__card">
+      <div class="cert__image">
+         <img src="assets/img/Gemini_Generated_Image_k1qavpk1qavpk1qa.png" alt="">
+      </div>
+
+      <div class="cert__info">
+         <span class="cert__year">2025</span>
+
+         <h3 class="cert__name">
+            Международный сертификат косметологии
+         </h3>
+
+         <p class="cert__text">
+            Подтверждение профессионального обучения современным
+            методикам эстетической косметологии и ухода за кожей.
+         </p>
+
+         <div class="cert__tags">
+            <span>Косметология</span>
+            <span>Skin Care</span>
+         </div>
+      </div>
+   </div>
+
+   <!-- CARD 2 -->
+   <div class="cert__card">
+      <div class="cert__image">
+         <img src="assets/img/about-img.png" alt="">
+      </div>
+
+      <div class="cert__info">
+         <span class="cert__year">2024</span>
+
+         <h3 class="cert__name">
+            Сертификат по лазерным процедурам
+         </h3>
+
+         <p class="cert__text">
+            Обучение современным технологиям лазерного омоложения
+            и безопасной эстетической терапии.
+         </p>
+
+         <div class="cert__tags">
+            <span>Laser</span>
+            <span>Aesthetic</span>
+         </div>
+      </div>
+   </div>
+
+   <!-- CARD 3 -->
+   <div class="cert__card">
+      <div class="cert__image">
+         <img src="assets/img/about-img.png" alt="">
+      </div>
+
+      <div class="cert__info">
+         <span class="cert__year">2023</span>
+
+         <h3 class="cert__name">
+            Advanced Facial Techniques
+         </h3>
+
+         <p class="cert__text">
+            Международный курс по профессиональным техникам
+            очищения, омоложения и восстановления кожи.
+         </p>
+
+         <div class="cert__tags">
+            <span>Facial</span>
+            <span>Professional</span>
+         </div>
+      </div>
+   </div>
+
+   <!-- CARD 4 -->
+   <div class="cert__card">
+      <div class="cert__image">
+         <img src="assets/img/about-img.png" alt="">
+      </div>
+
+      <div class="cert__info">
+         <span class="cert__year">2022</span>
+
+         <h3 class="cert__name">
+            Сертификат эстетической медицины
+         </h3>
+
+         <p class="cert__text">
+            Подготовка по современным стандартам эстетической
+            медицины и индивидуальному подходу к пациентам.
+         </p>
+
+         <div class="cert__tags">
+            <span>Beauty</span>
+            <span>Medical</span>
+         </div>
+      </div>
+   </div>
+
+</div>
+                              </div>
+                        </div>
+                    </section>
+
+                     <div class="section-divider"></div>
+         <!--==================== do ====================-->
+              <section class="reviews-section">
+
+                    <h2 class="reviews-title">Отзывы пациентов</h2>
+                    <p class="reviews-subtitle">Результаты, которым доверяют</p>
+
+                    <div class="reviews-grid" id="reviews-grid">
+                        <p class="reviews-state">Загрузка отзывов...</p>
+
+                        <!-- Декор -->
+                        <div class="decor decor-1">
+                            <svg width="100" height="100" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2V22M2 12H22" stroke="rgba(0,150,200,0.2)" stroke-width="2"/>
+                            </svg>
+                            </div>
+
+                            <div class="decor decor-2">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="rgba(0,150,200,0.15)" stroke-width="2"/>
+                            </svg>
+                            </div>
+                                                </div>
+
+                    </section>
+
+               <div class="section-divider"></div>
+               <!-- ====================booking -->
+               <section class="booking-modern">
+                  <div class="booking-modern__container">
+                     <div class="booking-panel">
+                        <span>CONSULTATION</span>
+                        <h2>Запишитесь на консультацию</h2>
+                        <p>
+                           Специалист оценит состояние кожи и подберет аккуратный план ухода без лишних процедур.
+                        </p>
+
+                        <div class="booking-panel__footer">
+                           <a href="booking.html" class="booking-main-btn">
+                              Записаться
+                              <i class="ri-arrow-right-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+               <div class="section-divider"></div>
+               <!--==================== ai ====================-->
+               <section class="ai section" id="ai">
+               <div class="ai__container container">
+
+                  <div class="ai__hero">
+                     <div class="ai__hero-copy">
+                        <h2 class="section__title">AI Анализ кожи</h2>
+                        <p class="ai__subtitle">
+                           Современные AI технологии для предварительной оценки кожи, структуры лица и заметных изменений по фото.
+                        </p>
+                     </div>
+                  </div>
+
+                  <div class="ai__grid">
+                     <article class="ai__panel ai__panel--skin">
+                        <div class="ai__visual">
+                           <div class="ai__icon">
+                              <i class="ri-scan-2-line"></i>
+                           </div>
+                           <span class="ai__soft-line"></span>
+                        </div>
+
+                        <div class="ai__panel-content">
+                           <div class="ai__panel-header">
+                              <h3>AI анализ состояния кожи</h3>
+                           </div>
+
+                           <p class="ai__description">
+                              Предварительная оценка текстуры, тона и визуального состояния кожи по фото. Подходит как первый шаг перед консультацией.
+                           </p>
+
+                           <div class="ai__panel-actions">
+                              <a href="ai-face.html" class="ai__button ai__button--secondary" data-ai-skin-link>
+                                 Проверить кожу <i class="ri-arrow-right-line"></i>
+                              </a>
+                           </div>
+                        </div>
+                     </article>
+
+                     <article class="ai__mini-card ai__mini-card--health">
+                        <div class="ai__visual">
+                           <div class="ai__icon">
+                              <i class="ri-heart-pulse-line"></i>
+                           </div>
+                           <span class="ai__soft-line"></span>
+                        </div>
+
+                        <div class="ai__panel-content">
+                           <div class="ai__panel-header">
+                              <h3 class="ai__title">AI дерматологический анализ</h3>
+                           </div>
+
+                           <p class="ai__description">
+                              Помогает заметить возможные проблемные зоны и понять, с каким запросом лучше обратиться к специалисту.
+                           </p>
+
+                           <a href="ai-disease.html" class="ai__button ai__button--ghost" data-ai-dermatology-link>
+                              Начать анализ <i class="ri-arrow-right-line"></i>
+                           </a>
+                        </div>
+                     </article>
+                  </div>
+
+               </div>
+               </section>
+               <!--==================== map ====================-->
+               <section class="location section" id="contact">
+               <div class="location__container container">
+
+                  <div class="location__top">
+                     <span class="location__eyebrow" data-site-doctor-name>Даданова Бегимай Нурмухамедовна</span>
+                     <h2 class="section__title">Адрес приёма и контакты</h2>
+                     <p class="location__lead">Запишитесь на консультацию дерматолога-косметолога и получите индивидуальный план ухода и процедур.</p>
+                  </div>
+
+                  <div class="location__content">
+
+                     <div class="location__map-wrap">
+                        <div class="location__map-glass">
+                           <iframe 
+                              src="https://maps.google.com/maps?q=%D0%A2%D1%83%D1%80%D1%83%D1%81%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0-13&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                              data-site-map-frame
+                              frameborder="0"
+                              allowfullscreen>
+                           </iframe>
+                        </div>
+
+                     </div>
+
+                     <div class="location__info">
+                        <div class="location__info-panel">
+                           <h3 data-site-specialty>Дерматолог-косметолог</h3>
+                           <p>Персональный приём, профессиональная диагностика кожи и эстетические процедуры.</p>
+                        </div>
+
+                        <div class="location__details">
+                           <p><i class="ri-map-pin-line"></i> <span data-site-address>Турусбекова-13</span></p>
+                           <p><i class="ri-phone-line"></i> <span data-site-phone>0702664406</span></p>
+                        </div>
+
+                        <div class="location__actions">
+                           <a class="location__route" href="https://maps.google.com/maps?q=%D0%A2%D1%83%D1%80%D1%83%D1%81%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0-13" data-site-map target="_blank" rel="noopener">
+                              Построить маршрут
+                              <i class="ri-arrow-right-up-line"></i>
+                           </a>
+                        </div>
+                     </div>
+
+                  </div>
+
+               </div>
+               </section>
+         <!-- Floating Button -->
+         <div class="chat-btn" id="chat-btn">
+            <i class="ri-chat-3-line"></i>
+         </div>
+
+
+
+               <!-- Chat Window -->
+               <div class="chat-window" id="chat-window">
+
+               <div class="chat-header">
+                  <div class="chat-title">
+                     <i class="ri-chat-3-line"></i>
+                     <span>AI Косметолог</span>
+                  </div>
+                  <button id="close-chat">✕</button>
+               </div>
+
+               <div class="chat-body" id="chat-body">
+
+                  <!-- Quick actions -->
+                  <div class="chat-quick">
+                     <button onclick="faqAnswer('price')">Цены</button>
+                     <button onclick="faqAnswer('services')">Услуги</button>
+                     <button onclick="faqAnswer('booking')">Запись</button>
+                     <button onclick="faqAnswer('address')">Адрес</button>
+                  </div>
+
+                  <div class="messages" id="messages"></div>
+
+               </div>
+
+               <div class="chat-input">
+                  <input type="text" id="user-input" placeholder="Спросите про процедуры...">
+                  <button id="send-btn"><i class="ri-send-plane-fill"></i></button>
+               </div>
+
+               </div>
+
+
+      <!--==================== FOOTER ====================-->
+
+               <footer class="footer">
+               <div class="footer__bg"></div>
+
+               <div class="footer__container container">
+
+                  <!-- LOGO + ABOUT -->
+                  <div class="footer__content">
+                     <h2 class="footer__logo">
+                     <i class="ri-stethoscope-line"></i> Dadanova
+                     </h2>
+
+                     <p class="footer__description">
+                     Современная косметология, профессиональный уход и AI технологии для вашей красоты и уверенности.
+
+                     </p>
+                  </div>
+
+                  <!-- NAVIGATION -->
+                  <div class="footer__content">
+                     <h3 class="footer__title">Навигация</h3>
+
+                     <ul class="footer__links">
+                     <li><a href="#home" class="footer__link"><i class="ri-home-5-line"></i> Главная</a></li>
+                     <li><a href="#services" class="footer__link"><i class="ri-sparkling-line"></i> Услуги</a></li>
+                     <li><a href="#ai" class="footer__link"><i class="ri-scan-2-line"></i> AI Анализ</a></li>
+                     <li><a href="#contact" class="footer__link"><i class="ri-map-pin-line"></i> Контакты</a></li>
+                     </ul>
+                  </div>
+
+                  <!-- CONTACT -->
+                  <div class="footer__content">
+                     <h3 class="footer__title">Контакты</h3>
+
+                     <ul class="footer__list">
+                     <li><i class="ri-map-pin-line"></i> <span data-site-address>Турусбекова-13</span></li>
+                     <li><i class="ri-phone-line"></i> <span data-site-phone>0702664406</span></li>
+                     <li><i class="ri-time-line"></i> 09:00 - 20:00</li>
+                     <li><i class="ri-mail-line"></i> <span data-site-email>begimaj.dadanova@gmail.com</span></li>
+                     </ul>
+                  </div>
+
+                  <!-- SOCIAL -->
+                  <div class="footer__content">
+                     <h3 class="footer__title">Мы в соцсетях</h3>
+
+                     <div class="footer__social">
+                     <a href="https://instagram.com/dr_dadanoca" class="footer__social-link" data-site-instagram>
+                        <i class="ri-instagram-line"></i>
+                     </a>
+                     <a href="https://www.tiktok.com/@dr_dadanova?_r=1&_t=ZP-97OjbFfa5JW" class="footer__social-link" data-site-telegram>
+                        <i class="ri-tiktok-line"></i>
+                     </a>
+                     <a href="tel:0702664406" class="footer__social-link" data-site-phone-link>
+                        <i class="ri-whatsapp-line"></i>
+                     </a>
+                     </div>
+                  </div>
+
+               </div>
+
+               <span class="footer__copy">
+              © 2026 Dadanova. Все права защищены
+               </span>
+               </footer>
+
+      <!--========== SCROLL UP ==========-->
+              <a href="#" class="scrollup" id="scroll-up"> 
+            <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+        </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.9/scrollreveal.min.js"></script> -->
+      <script src="https://unpkg.com/scrollreveal"></script>
+      <!--=============== SWIPER JS ===============-->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/config.js"></script>
+      <script src="assets/js/main.js"></script>
+
+   </body>
+   
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Вход в админку</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #eef6ff;
+        font-family: Montserrat;
+      }
+
+      .login {
+        width: 400px;
+        background: white;
+        padding: 40px;
+        border-radius: 30px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin-top: 15px;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        border: none;
+        border-radius: 15px;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+      }
+
+      .message {
+        min-height: 20px;
+        margin: 14px 0 0;
+        color: #b42318;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <h2>Вход врача</h2>
+
+      <input id="email" placeholder="Email" />
+
+      <input id="password" type="password" placeholder="Пароль" />
+
+      <button onclick="login()">Войти</button>
+
+      <p class="message" id="login-message"></p>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script>
+      const API_ROOT =
+        window.API_ROOT ||
+        window.APP_CONFIG?.API_ROOT ||
+        "";
+
+      async function login() {
+        const email = document.getElementById("email").value.trim();
+
+        const password = document.getElementById("password").value;
+
+        const message = document.getElementById("login-message");
+        message.textContent = "";
+
+        const form = new FormData();
+        form.append("email", email);
+        form.append("password", password);
+
+        try {
+          const response = await fetch(`${API_ROOT}/admin/login`, {
+            method: "POST",
+            body: form,
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok || !data.token) {
+            message.textContent = data.message || "Неверный логин или пароль";
+            return;
+          }
+
+          localStorage.setItem("adminToken", data.token);
+
+          window.location.href = "admin.html";
+        } catch (error) {
+          message.textContent = "Не удалось подключиться к серверу";
+        }
+      }
+
+      document.getElementById("password").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") login();
+      });
+    </script>
+  </body>
+</html>
